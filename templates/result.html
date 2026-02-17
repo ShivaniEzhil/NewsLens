@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summary - NewsLens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="result-container">
+        <header>
+            <a href="/" class="back-link">← Summarize Another</a>
+            <h1>Summary Result</h1>
+        </header>
+
+        <main>
+            <div class="summary-card">
+                <h2>AI Summary</h2>
+                <div class="summary-content">
+                    <p>{{ summary }}</p>
+                </div>
+            </div>
+
+            <div class="original-article">
+                <h3>Original Article</h3>
+                <p><strong>Title:</strong> {{ original_title }}</p>
+                <p><a href="{{ url }}" target="_blank" class="read-more">Read Full Article</a></p>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

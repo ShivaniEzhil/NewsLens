@@ -1,0 +1,7 @@
+flask
+transformers<5.0.0
+torch
+newspaper3k
+lxml
+requests
+lxml_html_clean

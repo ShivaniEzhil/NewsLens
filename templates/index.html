@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsLens - AI News Summarizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>NewsLens</h1>
+            <p>Paste a news article URL to get a concise AI-generated summary.</p>
+        </header>
+        
+        <main>
+            <form action="/summarize" method="POST">
+                <div class="input-group">
+                    <input type="url" name="url" placeholder="https://example.com/article" required>
+                    <button type="submit">Summarize</button>
+                    <!-- Loading indicator will be handled by CSS/JS or simple text for now -->
+                </div>
+            </form>
+            
+            {% if error %}
+            <div class="error-message">
+                <p>Error: {{ error }}</p>
+            </div>
+            {% endif %}
+        </main>
+        
+        <footer>
+            <p>Powered by Hugging Face Transformers & Flask</p>
+        </footer>
+    </div>
+</body>
+</html>

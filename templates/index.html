@@ -1,38 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NewsLens - AI News Summarizer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='logo.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <header>
             <h1>NewsLens</h1>
-            <p>Paste a news article URL to get a concise AI-generated summary.</p>
+            <p>Paste a news article URL or upload a file to get a concise AI-generated summary.</p>
         </header>
-        
+
         <main>
-            <form action="/summarize" method="POST">
-                <div class="input-group">
-                    <input type="url" name="url" placeholder="https://example.com/article" required>
-                    <button type="submit">Summarize</button>
-                    <!-- Loading indicator will be handled by CSS/JS or simple text for now -->
-                </div>
-            </form>
-            
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab(event, 'url-tab')">Paste URL</button>
+                <button class="tab-btn" onclick="openTab(event, 'file-tab')">Upload File</button>
+            </div>
+
+            <div id="url-tab" class="tab-content active">
+                <form action="/summarize" method="POST">
+                    <div class="input-group">
+                        <input type="url" name="url" placeholder="https://example.com/article" required>
+                        <button type="submit">Summarize</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="file-tab" class="tab-content">
+                <form action="/summarize" method="POST" enctype="multipart/form-data">
+                    <div class="input-group file-input-group">
+                        <input type="file" name="file" accept=".pdf, .png, .jpg, .jpeg" required>
+                        <button type="submit">Summarize File</button>
+                    </div>
+                </form>
+            </div>
+
+            <script>
+                function openTab(evt, tabName) {
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tab-content");
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                        tabcontent[i].classList.remove("active");
+                    }
+                    tablinks = document.getElementsByClassName("tab-btn");
+                    for (i = 0; i < tablinks.length; i++) {
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }
+                    document.getElementById(tabName).style.display = "block";
+                    document.getElementById(tabName).classList.add("active");
+                    evt.currentTarget.className += " active";
+                }
+            </script>
+
             {% if error %}
             <div class="error-message">
                 <p>Error: {{ error }}</p>
             </div>
             {% endif %}
         </main>
-        
-        <footer>
-            <p>Powered by Hugging Face Transformers & Flask</p>
-        </footer>
+
+
     </div>
 </body>
+
 </html>

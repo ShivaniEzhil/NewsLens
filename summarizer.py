@@ -1,5 +1,9 @@
 from newspaper import Article
 from transformers import pipeline
+import pdfplumber
+import pytesseract
+from PIL import Image
+import io
 
 # Initialize the summarization pipeline
 # Using facebook/bart-large-cnn model which is excellent for news summarization
@@ -24,6 +28,30 @@ def extract_article(url):
             "text": None,
             "error": str(e)
         }
+
+def extract_from_pdf(file_stream):
+    """
+    Extracts text from a PDF file stream using pdfplumber.
+    """
+    try:
+        text = ""
+        with pdfplumber.open(file_stream) as pdf:
+            for page in pdf.pages:
+                text += page.extract_text() or ""
+        return text
+    except Exception as e:
+        return f"Error extracting PDF: {str(e)}"
+
+def extract_from_image(file_stream):
+    """
+    Extracts text from an image file stream using Tesseract OCR.
+    """
+    try:
+        image = Image.open(file_stream)
+        text = pytesseract.image_to_string(image)
+        return text
+    except Exception as e:
+        return f"Error extraction Image OCR: {str(e)}"
 
 def generate_summary(text, max_length=150, min_length=50):
     """

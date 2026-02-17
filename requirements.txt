@@ -5,3 +5,7 @@ newspaper3k
 lxml
 requests
 lxml_html_clean
+pdfplumber
+pytesseract
+Pillow
+werkzeug

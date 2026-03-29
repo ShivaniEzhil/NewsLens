@@ -122,7 +122,24 @@ st.markdown("""
         font-weight: 600;
         font-size: 1rem;
     }
+
+    /* Fix for unselected tabs color */
+    button[data-baseweb="tab"] p {
+        color: #475569 !important; /* Dark slate gray for unselected tabs */
+    }
+
+    button[data-baseweb="tab"][aria-selected="true"] p {
+        color: #2563eb !important; /* Blue for selected tab */
+        font-weight: 700;
+    }
+
+    /* Fix for spinner/loading text visibility */
+    div[data-testid="stSpinner"] {
+        color: #1e293b !important;
+        font-weight: 500;
+    }
 </style>
+
 
 
 """, unsafe_allow_html=True)

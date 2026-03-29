@@ -44,9 +44,11 @@ st.markdown("""
     .subtitle-text {
         font-size: 1.25rem;
         text-align: center;
-        color: #64748b;
+        color: #334155; /* Darker than #64748b */
         margin-bottom: 2.5rem;
+        font-weight: 500;
     }
+
 
     .stButton>button {
         width: 100%;
@@ -94,11 +96,17 @@ st.markdown("""
     }
 
     div[data-testid="stExpander"] {
-        background: transparent;
-        border: none;
+        background: rgba(255, 255, 255, 0.4);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 12px;
         margin-top: 1.5rem;
     }
+
+    div[data-testid="stExpander"] p, div[data-testid="stExpander"] div {
+        color: #1e293b !important; /* Force high contrast dark text */
+    }
 </style>
+
 """, unsafe_allow_html=True)
 
 @st.cache_resource

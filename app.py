@@ -105,7 +105,25 @@ st.markdown("""
     div[data-testid="stExpander"] p, div[data-testid="stExpander"] div {
         color: #1e293b !important; /* Force high contrast dark text */
     }
+
+    /* Fix for white text in light colored notification/warning boxes */
+    div[data-testid="stNotification"] {
+        color: #1e293b !important;
+    }
+    
+    div[data-testid="stNotification"] p {
+        color: #1e293b !important;
+        font-weight: 500;
+    }
+
+    /* Fix for light input labels */
+    div[data-testid="stWidgetLabel"] p {
+        color: #1e293b !important;
+        font-weight: 600;
+        font-size: 1rem;
+    }
 </style>
+
 
 """, unsafe_allow_html=True)
 

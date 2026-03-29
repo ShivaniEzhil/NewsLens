@@ -5,9 +5,8 @@ import pytesseract
 from PIL import Image
 import io
 
-# Initialize the summarization pipeline
-# Using facebook/bart-large-cnn model which is excellent for news summarization
-summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+# Note: Model is now loaded in app.py via st.cache_resource for better thread safety on macOS.
+
 
 def extract_article(url):
     """
@@ -53,7 +52,8 @@ def extract_from_image(file_stream):
     except Exception as e:
         return f"Error extraction Image OCR: {str(e)}"
 
-def generate_summary(text, max_length=150, min_length=50):
+def generate_summary(text, summarizer_model, max_length=150, min_length=50):
+
     """
     Generates a summary of the provided text using the BART model.
     Handles long text by chunking if necessary, but for simplicity, we'll
@@ -69,13 +69,14 @@ def generate_summary(text, max_length=150, min_length=50):
         # Real-world apps might need smarter chunking.
         truncated_text = text[:3000] 
         
-        summary = summarizer(truncated_text, max_length=max_length, min_length=min_length, do_sample=False)
+        # The pipeline is now passed as an argument or loaded via cache
+        summary = summarizer_model(truncated_text, max_length=max_length, min_length=min_length, do_sample=False)
+
         return summary[0]['summary_text']
     except Exception as e:
         return f"Error generating summary: {str(e)}"
 
 if __name__ == "__main__":
-    # Test quickly
-    test_url = "https://www.bbc.com/news/world-us-canada-68385074" # Example URL
-    # Note: Replace with a valid URL for testing
-    print("Summarizer module loaded.")
+    # Note: Testing now requires a model instance.
+    print("Summarizer module loaded. Use app.py to run with caching.")
+

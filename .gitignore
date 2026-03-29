@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.streamlit/
+venv/
+.env
+.DS_Store
+test_minimal.py

@@ -1,4 +1,4 @@
-flask
+streamlit
 transformers<5.0.0
 torch
 newspaper3k
@@ -8,4 +8,5 @@ lxml_html_clean
 pdfplumber
 pytesseract
 Pillow
-werkzeug
+pyarrow
+watchdog

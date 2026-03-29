@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from summarizer import extract_article, generate_summary
+from summarizer import extract_article, generate_summary, extract_from_pdf, extract_from_image
 
 app = Flask(__name__)
 
